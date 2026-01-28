@@ -1,11 +1,26 @@
+import click
 from lib.db.connection import Base, engine
 from lib.models.author import Author
 from lib.models.book import Book
+from lib.cli.main_menu import start
 
-def init_db():
-    # creates tables if they don't exist
+@click.group()
+def cli():
+    """Manage your personal library."""
+    pass
+
+@cli.command()
+def initdb():
+    """Initialize the database"""
     Base.metadata.create_all(engine)
-    print("Database initialized successfully.")
+    click.echo("Database initialized successfully.")
+
+@cli.command()
+def run():
+    """Start the application menu."""
+    # Ensure DB exists before running
+    Base.metadata.create_all(engine)
+    start()
 
 if __name__ == "__main__":
-    init_db()
+    cli()
