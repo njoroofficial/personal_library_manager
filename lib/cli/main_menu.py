@@ -6,7 +6,7 @@ from rich.table import Table
 console = Console()
 
 def start():
-    console.print("\n[bold cyan]📚 Welcome to BiblioCLI: The Personal Library Manager 📚[/bold cyan]")
+    console.print("\n[bold cyan]📚 Welcome to p.l.m.CLI: The Personal Library Manager 📚[/bold cyan]")
     
     while True:
         console.print("\n[bold yellow]--- MAIN MENU ---[/bold yellow]")
