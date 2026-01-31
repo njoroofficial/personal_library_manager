@@ -78,6 +78,13 @@ class Book(Base):
     def find_by_id(cls, book_id):
         """Finds a book by ID."""
         return session.query(cls).filter_by(id=book_id).first()
+    
+    @classmethod
+    def find_by_title_partial(cls, title_fragment):
+        """Finds books whose titles contain the given string."""
+        # %{}% means "anything before AND anything after"
+        search_term = f"%{title_fragment}%"
+        return session.query(cls).filter(cls._title.ilike(search_term)).all()
 
     def delete(self):
         """Deletes this book instance."""

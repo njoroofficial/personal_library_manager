@@ -59,6 +59,13 @@ class Author(Base):
         """Finds an author by Name."""
         return session.query(cls).filter_by(_name=name).first()
 
+    @classmethod
+    def find_by_name_partial(cls, name_fragment):
+        """Finds authors whose names contain the given string (case-insensitive)."""
+        # %{}% means "anything before AND anything after"
+        search_term = f"%{name_fragment}%"
+        return session.query(cls).filter(cls._name.ilike(search_term)).all()
+
     def delete(self):
         """Deletes this author instance."""
         session.delete(self)
